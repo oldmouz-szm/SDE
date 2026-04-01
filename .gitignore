@@ -1,0 +1,8 @@
+sde_solver
+obs_generator
+generated_obs/
+*.o
+*.out
+*.log
+*.tmp
+.DS_Store
