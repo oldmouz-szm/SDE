@@ -53,7 +53,6 @@ Example:
 ```bash
 ./cda_solver ../iscas85/bench/c1908.bench generated_obs/c1908_obs_0.txt --first --timeout 30
 ```
-
 ## Generate Observation Sets (Single/Double Fault)
 
 Build:
