@@ -1,0 +1,4 @@
+Method: sde_solver
+  Avg hit rate:    0.2308
+  Avg success rate:0.9000
+  Avg runtime:     0.0781 s

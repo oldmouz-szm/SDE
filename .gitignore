@@ -1,6 +1,8 @@
 sde_solver
+cda_solver
 obs_generator
 generated_obs/
+*_batch.txt
 *.o
 *.out
 *.log
