@@ -148,6 +148,7 @@ def main():
         # Aggregate — three key metrics
         total = len(results)
         ok = [r for r in results if r["status"] == "ok"]
+        err = [r for r in results if r["status"] in ("timeout", "error")]
         # Non-empty diagnosis: hit rate applicable
         app = [r for r in ok if r["hit_rate"] is not None]
         # Empty diagnosis (all-healthy consistent) → pseudo-normal, count as success
@@ -155,9 +156,10 @@ def main():
         # Hit rate: only among non-empty diagnoses
         hit_rates = [r["hit_rate"] for r in app]
         avg_hit_rate = sum(hit_rates) / len(hit_rates) if hit_rates else float("nan")
-        # Success rate: (non-empty with hit>0 + empty) / total
+        # Complete misses: non-empty diagnosis with no hits
         misses = sum(1 for r in app if r["hit_rate"] == 0.0)
-        successes = total - misses
+        # Success: ok cases that are either truly masked (empty) or have non-zero hit rate
+        successes = len(masked) + sum(1 for r in app if r["hit_rate"] > 0)
         success_rate = successes / total
         # Average runtime
         all_times = [r["time_s"] for r in results]
