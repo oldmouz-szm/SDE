@@ -158,8 +158,9 @@ def main():
         avg_hit_rate = sum(hit_rates) / len(hit_rates) if hit_rates else float("nan")
         # Complete misses: non-empty diagnosis with no hits
         misses = sum(1 for r in app if r["hit_rate"] == 0.0)
-        # Success: ok cases that are either truly masked (empty) or have non-zero hit rate
-        successes = len(masked) + sum(1 for r in app if r["hit_rate"] > 0)
+        # Success: solver completed (returned any diagnosis, including empty/masked)
+        # Failure: only timeout or error (solver didn't finish)
+        successes = total - len(err)
         success_rate = successes / total
         # Average runtime
         all_times = [r["time_s"] for r in results]
